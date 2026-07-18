@@ -11,19 +11,19 @@ pipeline {
 
         stage('Verify Python') {
             steps {
-                bat 'python --version'
+                sh 'python --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                bat 'pip install -r requirements.txt'
+                sh 'pip install -r requirements.txt'
             }
         }
 
         stage('Run Storage Automation') {
             steps {
-                bat 'python src/main.py'
+                sh 'python src/main.py'
             }
         }
     }
