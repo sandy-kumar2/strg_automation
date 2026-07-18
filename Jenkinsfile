@@ -3,27 +3,29 @@ pipeline {
 
     stages {
 
-        stage('Checkout Source') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Verify Python') {
             steps {
                 sh 'python3 --version'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Create Virtual Environment') {
             steps {
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                    python3 -m venv venv
+                    . venv/bin/activate
+                    pip install --upgrade pip
+                    pip install -r requirements.txt
+                '''
             }
         }
 
         stage('Run Storage Automation') {
             steps {
-                sh 'python3 src/main.py'
+                sh '''
+                    . venv/bin/activate
+                    python src/main.py
+                '''
             }
         }
     }
