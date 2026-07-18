@@ -11,19 +11,19 @@ pipeline {
 
         stage('Verify Python') {
             steps {
-                sh 'python --version'
+                sh 'python3 --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip3 install -r requirements.txt'
             }
         }
 
         stage('Run Storage Automation') {
             steps {
-                sh 'python src/main.py'
+                sh 'python3 src/main.py'
             }
         }
     }
